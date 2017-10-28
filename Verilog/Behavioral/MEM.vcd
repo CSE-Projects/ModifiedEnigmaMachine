@@ -1,0 +1,67 @@
+$date
+	Sat Oct 28 18:28:04 2017
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	100ps
+$end
+$scope module t_MEM $end
+$var wire 8 ! out [8:1] $end
+$var reg 8 " in [8:1] $end
+$var reg 2 # setting [1:0] $end
+$scope module inst $end
+$var wire 8 $ in [8:1] $end
+$var wire 2 % setting [1:0] $end
+$var wire 8 & out4 [8:1] $end
+$var wire 8 ' out3 [8:1] $end
+$var wire 8 ( out2 [8:1] $end
+$var wire 8 ) out1 [8:1] $end
+$var reg 8 * inp [8:1] $end
+$var reg 8 + out [8:1] $end
+$scope module box1 $end
+$var wire 8 , in [8:1] $end
+$var reg 8 - out [8:1] $end
+$upscope $end
+$scope module box2 $end
+$var wire 8 . in [8:1] $end
+$var reg 8 / out [8:1] $end
+$upscope $end
+$scope module box3 $end
+$var wire 8 0 in [8:1] $end
+$var reg 8 1 out [8:1] $end
+$upscope $end
+$scope module box4 $end
+$var wire 8 2 in [8:1] $end
+$var reg 8 3 out [8:1] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b1000010 3
+b1000001 2
+b1000010 1
+b1000001 0
+b1000010 /
+b1000001 .
+b1000010 -
+b1000001 ,
+bx +
+b1000001 *
+b1000010 )
+b1000010 (
+b1000010 '
+b1000010 &
+b1 %
+b1000001 $
+b1 #
+b1000001 "
+bx !
+$end
+#10
+b1000010 !
+b1000010 +
+#800
