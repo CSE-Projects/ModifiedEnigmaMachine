@@ -12,19 +12,17 @@ module MEM (output [8:1] out, input [8:1] in, input [1:0] setting);
 
     encoder Encoder (encodedInput, in);
 
-    //block1 box1 (out1, encodedInput);
-    //block2 box2 (out2, encodedInput);
-    //block3 box3 (out3, encodedInput);
-    //block4 box4 (out4, encodedInput);
-
-    assign out1 = 5'b00010;
+    block1 box1 (out1, encodedInput);
+    block2 box2 (out2, encodedInput);
+    block3 box3 (out3, encodedInput);
+    block4 box4 (out4, encodedInput);
 
     // selection 
-    assign selectedOut[0] = (~setting[0] & ~setting[1] & out1[0]) | (~setting[0] & setting[1] & out2[0]) | (setting[0] & ~setting[1] & out3[0]) | (setting[0] & setting[1] & out4[0]);
-    assign selectedOut[1] = (~setting[0] & ~setting[1] & out1[1]) | (~setting[0] & setting[1] & out2[1]) | (setting[0] & ~setting[1] & out3[1]) | (setting[0] & setting[1] & out4[1]);
-    assign selectedOut[2] = (~setting[0] & ~setting[1] & out1[2]) | (~setting[0] & setting[1] & out2[2]) | (setting[0] & ~setting[1] & out3[2]) | (setting[0] & setting[1] & out4[2]);
-    assign selectedOut[3] = (~setting[0] & ~setting[1] & out1[3]) | (~setting[0] & setting[1] & out2[3]) | (setting[0] & ~setting[1] & out3[3]) | (setting[0] & setting[1] & out4[3]);
-    assign selectedOut[4] = (~setting[0] & ~setting[1] & out1[4]) | (~setting[0] & setting[1] & out2[4]) | (setting[0] & ~setting[1] & out3[4]) | (setting[0] & setting[1] & out4[4]);
+    assign selectedOut[0] = (~setting[0] & ~setting[1] & out1[0]) | (setting[0] & ~setting[1] & out2[0]) | (~setting[0] & setting[1] & out3[0]) | (setting[0] & setting[1] & out4[0]);
+    assign selectedOut[1] = (~setting[0] & ~setting[1] & out1[1]) | (setting[0] & ~setting[1] & out2[1]) | (~setting[0] & setting[1] & out3[1]) | (setting[0] & setting[1] & out4[1]);
+    assign selectedOut[2] = (~setting[0] & ~setting[1] & out1[2]) | (setting[0] & ~setting[1] & out2[2]) | (~setting[0] & setting[1] & out3[2]) | (setting[0] & setting[1] & out4[2]);
+    assign selectedOut[3] = (~setting[0] & ~setting[1] & out1[3]) | (setting[0] & ~setting[1] & out2[3]) | (~setting[0] & setting[1] & out3[3]) | (setting[0] & setting[1] & out4[3]);
+    assign selectedOut[4] = (~setting[0] & ~setting[1] & out1[4]) | (setting[0] & ~setting[1] & out2[4]) | (~setting[0] & setting[1] & out3[4]) | (setting[0] & setting[1] & out4[4]);
     
     
     decoder Decoder (out, selectedOut);
@@ -48,13 +46,22 @@ endmodule
 
 module block3 (output [4:0] out, input [4:0] in);
 
+    assign out[0]=(~in[4]&~in[3]&~in[2])|(~in[3]&in[2]&~in[1])|(~in[2]&in[1]&in[0])|(in[2]&~in[1]&~in[0])|(in[4]&in[1]&~in[0]);
+    assign out[1]=(in[2]&in[1])|(~in[4]&~in[3]&in[1])|(~in[4]&in[1]&in[0])|(~in[4]&~in[3]&in[2]&in[0])|(in[4]&~in[3]&~in[2]&~in[0]);
+    assign out[2]=(~in[3]&in[1]&~in[0])|(in[3]&~in[1]&in[0])|(in[3]&in[2]&in[1])|(in[4]&in[2]&~in[0])|(in[4]&~in[2]&in[1])|(~in[4]&~in[2]&~in[1]&in[0]);
+    assign out[3]=(in[4]&in[3])|(~in[3]&in[2]&~in[0])|(in[3]&~in[1]&~in[0])|(in[4]&~in[1]&~in[0])|(~in[4]&~in[3]&~in[2]&in[1]&in[0]);
+    assign out[4]=(in[3]&in[2]&~in[1])|(in[3]&in[2]&in[0])|(~in[4]&~in[3]&~in[2]&~in[1])|(~in[4]&~in[3]&~in[1]&in[0])|(~in[4]&in[3]&~in[2]&~in[0])|(in[4]&~in[2]&in[1]&~in[0])|(in[4]&in[2]&in[1]&in[0]);
     
 
 endmodule
 
 module block4 (output [4:0] out, input [4:0] in);
 
-   
+    assign out[0]=(in[4]&~in[0])|(~in[3]&~in[1]&~in[0])|(in[2]&in[1]&~in[0])|(in[3]&~in[2]&~in[0])|(~in[4]&~in[3]&in[2]&in[1])|(in[4]&~in[3]&~in[2]&~in[1]);
+    assign out[1]=(in[4]&~in[3]&~in[2])|(in[3]&in[1]&~in[0])|(in[3]&in[2]&~in[1])|(in[4]&~in[2]&in[0])|(in[4]&in[1]&in[0])|(~in[3]&~in[2]&in[1]&in[0])|(in[4]&~in[3]&~in[1]&~in[0]);
+    assign out[2]=(in[3]&~in[1]&in[0])|(in[3]&in[2]&in[1])|(~in[4]&~in[2]&~in[1]&~in[0])|(~in[4]&~in[3]&in[1]&~in[0])|(in[4]&~in[2]&~in[1]&in[0])|(in[4]&in[2]&~in[1]&~in[0])|(in[4]&in[2]&in[1]&in[0]);
+    assign out[3]=(in[4]&in[2])|(~in[3]&in[2]&~in[0])|(in[4]&in[1]&in[0])|(~in[4]&~in[3]&in[1]&~in[0])|(in[4]&~in[3]&~in[1]&~in[0])|(~in[4]&~in[3]&~in[2]&~in[1]&in[0]);
+    assign out[4]=(in[3]&in[1])|(~in[4]&in[1]&in[0])|(in[4]&in[3]&in[0])|(~in[4]&~in[3]&~in[2]&in[0])|(~in[4]&in[3]&~in[2]&~in[0])|(in[4]&in[2]&in[1]&~in[0]);
 
 endmodule
 
