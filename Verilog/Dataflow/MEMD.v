@@ -43,7 +43,6 @@ endmodule
 
 module block2 (output [4:0] out, input [4:0] in);
 
-   
     
 
 endmodule

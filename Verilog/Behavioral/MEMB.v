@@ -32,32 +32,32 @@ module block1 (output reg [8:1] out, input [8:1] in);
 
     always @ (in) begin
         case (in)
-            "A": begin out <= "B"; end
-            "B": begin out <= "B"; end
-            "C": begin out <= "B"; end
-            "D": begin out <= "B"; end
-            "E": begin out <= "B"; end
-            "F": begin out <= "B"; end
-            "G": begin out <= "B"; end
-            "H": begin out <= "B"; end
-            "I": begin out <= "B"; end
-            "J": begin out <= "B"; end
-            "K": begin out <= "B"; end
-            "L": begin out <= "B"; end
-            "M": begin out <= "B"; end
-            "N": begin out <= "B"; end
-            "O": begin out <= "B"; end
-            "P": begin out <= "B"; end
-            "Q": begin out <= "B"; end
-            "R": begin out <= "B"; end
-            "S": begin out <= "B"; end
-            "T": begin out <= "B"; end
-            "U": begin out <= "B"; end
-            "V": begin out <= "B"; end
-            "W": begin out <= "B"; end
-            "X": begin out <= "B"; end
-            "Y": begin out <= "B"; end
-            "Z": begin out <= "B"; end
+            "A": begin out <= "O"; end
+            "B": begin out <= "X"; end
+            "C": begin out <= "Z"; end
+            "D": begin out <= "W"; end
+            "E": begin out <= "T"; end
+            "F": begin out <= "J"; end
+            "G": begin out <= "S"; end
+            "H": begin out <= "U"; end
+            "I": begin out <= "N"; end
+            "J": begin out <= "F"; end
+            "K": begin out <= "V"; end
+            "L": begin out <= "Y"; end
+            "M": begin out <= "R"; end
+            "N": begin out <= "I"; end
+            "O": begin out <= "A"; end
+            "P": begin out <= "Q"; end
+            "Q": begin out <= "P"; end
+            "R": begin out <= "M"; end
+            "S": begin out <= "G"; end
+            "T": begin out <= "E"; end
+            "U": begin out <= "H"; end
+            "V": begin out <= "K"; end
+            "W": begin out <= "D"; end
+            "X": begin out <= "F"; end
+            "Y": begin out <= "L"; end
+            "Z": begin out <= "C"; end
         endcase
     end
 
@@ -68,32 +68,32 @@ module block2 (output reg [8:1] out, input [8:1] in);
 
     always @ (in) begin
         case (in)
-            "A": begin out <= "B"; end
-            "B": begin out <= "B"; end
-            "C": begin out <= "B"; end
-            "D": begin out <= "B"; end
-            "E": begin out <= "B"; end
-            "F": begin out <= "B"; end
-            "G": begin out <= "B"; end
-            "H": begin out <= "B"; end
-            "I": begin out <= "B"; end
-            "J": begin out <= "B"; end
-            "K": begin out <= "B"; end
-            "L": begin out <= "B"; end
-            "M": begin out <= "B"; end
-            "N": begin out <= "B"; end
-            "O": begin out <= "B"; end
-            "P": begin out <= "B"; end
-            "Q": begin out <= "B"; end
-            "R": begin out <= "B"; end
-            "S": begin out <= "B"; end
-            "T": begin out <= "B"; end
-            "U": begin out <= "B"; end
-            "V": begin out <= "B"; end
-            "W": begin out <= "B"; end
-            "X": begin out <= "B"; end
-            "Y": begin out <= "B"; end
-            "Z": begin out <= "B"; end
+            "A": begin out <= "X"; end
+            "B": begin out <= "V"; end
+            "C": begin out <= "D"; end
+            "D": begin out <= "C"; end
+            "E": begin out <= "S"; end
+            "F": begin out <= "H"; end
+            "G": begin out <= "O"; end
+            "H": begin out <= "F"; end
+            "I": begin out <= "Y"; end
+            "J": begin out <= "T"; end
+            "K": begin out <= "W"; end
+            "L": begin out <= "Q"; end
+            "M": begin out <= "R"; end
+            "N": begin out <= "P"; end
+            "O": begin out <= "G"; end
+            "P": begin out <= "H"; end
+            "Q": begin out <= "L"; end
+            "R": begin out <= "M"; end
+            "S": begin out <= "E"; end
+            "T": begin out <= "J"; end
+            "U": begin out <= "Z"; end
+            "V": begin out <= "F"; end
+            "W": begin out <= "K"; end
+            "X": begin out <= "A"; end
+            "Y": begin out <= "I"; end
+            "Z": begin out <= "U"; end
         endcase
     end
 
@@ -103,32 +103,32 @@ module block3 (output reg [8:1] out, input [8:1] in);
 
     always @ (in) begin
         case (in)
-            "A": begin out <= "B"; end
-            "B": begin out <= "B"; end
-            "C": begin out <= "B"; end
-            "D": begin out <= "B"; end
-            "E": begin out <= "B"; end
-            "F": begin out <= "B"; end
-            "G": begin out <= "B"; end
-            "H": begin out <= "B"; end
-            "I": begin out <= "B"; end
-            "J": begin out <= "B"; end
-            "K": begin out <= "B"; end
-            "L": begin out <= "B"; end
-            "M": begin out <= "B"; end
-            "N": begin out <= "B"; end
-            "O": begin out <= "B"; end
-            "P": begin out <= "B"; end
-            "Q": begin out <= "B"; end
-            "R": begin out <= "B"; end
-            "S": begin out <= "B"; end
-            "T": begin out <= "B"; end
-            "U": begin out <= "B"; end
+            "A": begin out <= "R"; end
+            "B": begin out <= "V"; end
+            "C": begin out <= "H"; end
+            "D": begin out <= "L"; end
+            "E": begin out <= "J"; end
+            "F": begin out <= "T"; end
+            "G": begin out <= "O"; end
+            "H": begin out <= "C"; end
+            "I": begin out <= "Y"; end
+            "J": begin out <= "E"; end
+            "K": begin out <= "Q"; end
+            "L": begin out <= "D"; end
+            "M": begin out <= "Z"; end
+            "N": begin out <= "U"; end
+            "O": begin out <= "G"; end
+            "P": begin out <= "W"; end
+            "Q": begin out <= "K"; end
+            "R": begin out <= "A"; end
+            "S": begin out <= "X"; end
+            "T": begin out <= "F"; end
+            "U": begin out <= "N"; end
             "V": begin out <= "B"; end
-            "W": begin out <= "B"; end
-            "X": begin out <= "B"; end
-            "Y": begin out <= "B"; end
-            "Z": begin out <= "B"; end
+            "W": begin out <= "P"; end
+            "X": begin out <= "S"; end
+            "Y": begin out <= "I"; end
+            "Z": begin out <= "M"; end
         endcase
     end
 
@@ -138,32 +138,32 @@ module block4 (output reg [8:1] out, input [8:1] in);
 
     always @ (in) begin
         case (in)
-            "A": begin out <= "B"; end
-            "B": begin out <= "B"; end
-            "C": begin out <= "B"; end
-            "D": begin out <= "B"; end
-            "E": begin out <= "B"; end
-            "F": begin out <= "B"; end
-            "G": begin out <= "B"; end
-            "H": begin out <= "B"; end
-            "I": begin out <= "B"; end
-            "J": begin out <= "B"; end
-            "K": begin out <= "B"; end
-            "L": begin out <= "B"; end
-            "M": begin out <= "B"; end
-            "N": begin out <= "B"; end
-            "O": begin out <= "B"; end
-            "P": begin out <= "B"; end
-            "Q": begin out <= "B"; end
-            "R": begin out <= "B"; end
-            "S": begin out <= "B"; end
-            "T": begin out <= "B"; end
-            "U": begin out <= "B"; end
-            "V": begin out <= "B"; end
-            "W": begin out <= "B"; end
-            "X": begin out <= "B"; end
+            "A": begin out <= "F"; end
+            "B": begin out <= "Y"; end
+            "C": begin out <= "M"; end
+            "D": begin out <= "S"; end
+            "E": begin out <= "J"; end
+            "F": begin out <= "A"; end
+            "G": begin out <= "N"; end
+            "H": begin out <= "R"; end
+            "I": begin out <= "V"; end
+            "J": begin out <= "E"; end
+            "K": begin out <= "T"; end
+            "L": begin out <= "Q"; end
+            "M": begin out <= "C"; end
+            "N": begin out <= "G"; end
+            "O": begin out <= "X"; end
+            "P": begin out <= "U"; end
+            "Q": begin out <= "L"; end
+            "R": begin out <= "H"; end
+            "S": begin out <= "D"; end
+            "T": begin out <= "K"; end
+            "U": begin out <= "P"; end
+            "V": begin out <= "I"; end
+            "W": begin out <= "Z"; end
+            "X": begin out <= "O"; end
             "Y": begin out <= "B"; end
-            "Z": begin out <= "B"; end
+            "Z": begin out <= "W"; end
         endcase
     end
 
