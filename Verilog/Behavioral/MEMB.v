@@ -2,6 +2,7 @@
 
 module MEM (output reg [8:1] out, input [8:1] in, input [1:0] setting);
 
+    // Variables for outputs from each black box module
     wire [8:1] out1;
     wire [8:1] out2;
     wire [8:1] out3;
@@ -9,27 +10,31 @@ module MEM (output reg [8:1] out, input [8:1] in, input [1:0] setting);
 
     reg [8:1] inp;
 
+    // 4 black box module threads instantiated
     block1 box1 (out1, inp);
     block2 box2 (out2, inp);
     block3 box3 (out3, inp);
     block4 box4 (out4, inp);
     
-    always @ (1) begin
+    // main thread for selection logic
+    always @ (in) begin
         
         inp = in;
         #1;
         case (setting)
-            2'b00: begin out = out1; end
-            2'b01: begin out = out2; end
-            2'b10: begin out = out3; end
-            2'b11: begin out = out4; end
+            2'b00: begin out <= out1; end
+            2'b01: begin out <= out2; end
+            2'b10: begin out <= out3; end
+            2'b11: begin out <= out4; end
         endcase
     end
 
 endmodule
 
+// Module depicting black box 1 functionality in circuit
 module block1 (output reg [8:1] out, input [8:1] in);
 
+    // this thread denotes the behavior of the black box by specifing the mapping choosen for this black box
     always @ (in) begin
         case (in)
             "A": begin out <= "O"; end
@@ -63,9 +68,10 @@ module block1 (output reg [8:1] out, input [8:1] in);
 
 endmodule
 
-
+// Module depicting black box 2 functionality in circuit
 module block2 (output reg [8:1] out, input [8:1] in);
 
+    // this thread denotes the behavior of the black box by specifing the mapping choosen for this black box
     always @ (in) begin
         case (in)
             "A": begin out <= "X"; end
@@ -99,8 +105,10 @@ module block2 (output reg [8:1] out, input [8:1] in);
 
 endmodule
 
+// Module depicting black box 3 functionality in circuit
 module block3 (output reg [8:1] out, input [8:1] in);
 
+    // this thread denotes the behavior of the black box by specifing the mapping choosen for this black box
     always @ (in) begin
         case (in)
             "A": begin out <= "R"; end
@@ -134,8 +142,10 @@ module block3 (output reg [8:1] out, input [8:1] in);
 
 endmodule
 
+// Module depicting black box 4 functionality in circuit
 module block4 (output reg [8:1] out, input [8:1] in);
 
+    // this thread denotes the behavior of the black box by specifing the mapping choosen for this black box
     always @ (in) begin
         case (in)
             "A": begin out <= "F"; end
