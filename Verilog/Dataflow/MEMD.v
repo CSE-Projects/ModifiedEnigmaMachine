@@ -3,25 +3,52 @@
 // 
 module MEM (output [8:1] out, input [8:1] in, input [1:0] setting);
 
+
     // Variables for outputs from each black box module
+        // varible to store output from black box 1
     wire [4:0] out1;
+
+        // varible to store output from black box 2
     wire [4:0] out2;
+
+        // varible to store output from black box 3
     wire [4:0] out3;
+
+        // varible to store output from black box 4
     wire [4:0] out4;
+
+
 
     // Varible to get 5 bit binary encoding for the 8 bit ASCII character
     wire [4:0] encodedInput;
 
+
+
     // Variable to select the bits from all black boxes based on setting
     wire [4:0] selectedOut;
 
+
+
     // Encoder module thread instantiated
+    // (output: stored in encodedInput variable after converting to 5 bit encoding from 8 bit ASCII, input: input to machine (character in ASCII))
     encoder Encoder (encodedInput, in);
 
+
+
+    // Black box threads instantiated 
+        // black box 1 (output: output bits from box1, input: encodedInput bits from encoder module)
     block1 box1 (out1, encodedInput);
+    
+        // black box 1 (output: output bits from box2, input: encodedInput bits from encoder module)
     block2 box2 (out2, encodedInput);
+
+        // black box 1 (output: output bits from box3, input: encodedInput bits from encoder module)
     block3 box3 (out3, encodedInput);
+
+        // black box 1 (output: output bits from box4, input: encodedInput bits from encoder module)
     block4 box4 (out4, encodedInput);
+
+
 
     // Selection logic
     assign selectedOut[0] = (~setting[0] & ~setting[1] & out1[0]) | (setting[0] & ~setting[1] & out2[0]) | (~setting[0] & setting[1] & out3[0]) | (setting[0] & setting[1] & out4[0]);
@@ -30,7 +57,10 @@ module MEM (output [8:1] out, input [8:1] in, input [1:0] setting);
     assign selectedOut[3] = (~setting[0] & ~setting[1] & out1[3]) | (setting[0] & ~setting[1] & out2[3]) | (~setting[0] & setting[1] & out3[3]) | (setting[0] & setting[1] & out4[3]);
     assign selectedOut[4] = (~setting[0] & ~setting[1] & out1[4]) | (setting[0] & ~setting[1] & out2[4]) | (~setting[0] & setting[1] & out3[4]) | (setting[0] & setting[1] & out4[4]);
     
-    // Decoder module thread instantiated
+
+
+    // Decoder module thread instantiated 
+    // (output: output of the machine, input: selected bits from selection logic)
     decoder Decoder (out, selectedOut);
     
 
@@ -60,7 +90,7 @@ endmodule
 module block2 (output [4:0] out, input [4:0] in);
 
     // F5 = A'D'E + A'CE + BCD' + ACD' + A'B'C'E' + B'C'D'E' + AC'DE 
-    assign out[0] = (~in[4] & ~in[2] & in[0]) | (~in[4] & in[2] & in[0]) | (in[3] & in[2] & ~in[1]) | (in[4] & in[2] & ~in[1]) | (~in[4] & ~in[3] & ~in[2] & ~in[0]) | (~in[3] & ~in[2] & ~in[1] & ~in[0]) | (in[4] & ~in[2] & in[1] & in[0]);
+    assign out[0] = (~in[4] & ~in[1] & in[0]) | (~in[4] & in[2] & in[0]) | (in[3] & in[2] & ~in[1]) | (in[4] & in[2] & ~in[1]) | (~in[4] & ~in[3] & ~in[2] & ~in[0]) | (~in[3] & ~in[2] & ~in[1] & ~in[0]) | (in[4] & ~in[2] & in[1] & in[0]);
     
     // F4 = A'DE' + CDE' + B'C'D'E' + A'B'C'D + A'B'CD' + A'BD'E
     assign out[1] = (~in[4] & in[1] & ~in[0]) | (in[2] & in[1] & ~in[0]) | (~in[3] & ~in[2] & ~in[1] & ~in[0]) | (~in[4] & ~in[3] & ~in[2] & in[1]) | (~in[4] & ~in[3] & in[2] & ~in[1]) | (~in[4] & in[3] & ~in[1] & in[0]);

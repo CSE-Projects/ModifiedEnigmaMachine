@@ -3,22 +3,43 @@
 module MEM (output reg [8:1] out, input [8:1] in, input [1:0] setting);
 
     // Variables for outputs from each black box module
+        // varible to store output from black box 1
     wire [8:1] out1;
+
+        // varible to store output from black box 2
     wire [8:1] out2;
+
+        // varible to store output from black box 3
     wire [8:1] out3;
+
+        // varible to store output from black box 4
     wire [8:1] out4;
 
+
+    // Varible to store inputed ASCII character
     reg [8:1] inp;
 
-    // 4 black box module threads instantiated
+
+
+    // Black box threads instantiated 
+        // black box 1 (output: output bits from box1, input: inp bits from input to the machine)
     block1 box1 (out1, inp);
+    
+        // black box 1 (output: output bits from box2, input: inp bits from input to the machine)
     block2 box2 (out2, inp);
+
+        // black box 1 (output: output bits from box3, input: inp bits from input to the machine)
     block3 box3 (out3, inp);
+
+        // black box 1 (output: output bits from box4, input: inp bits from input to the machine)
     block4 box4 (out4, inp);
     
+
+
     // main thread for selection logic
     always @ (in) begin
         
+        // stored input ASCII character in inp 
         inp = in;
         #1;
         case (setting)
