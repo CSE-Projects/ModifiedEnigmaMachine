@@ -1,6 +1,28 @@
 `timescale 1ns/100ps
 
-// 
+/*
+        TITLE: THE MODIFIED ENIGMA MACHINE
+
+        REG NO: 16CO154-16CO233
+
+        ABSTRACT: A circuit that encrypts data by mapping each alphabet to another alphabet randomly. 
+                  This will be done in such a way that if the same alphabet is repeated, 
+                  the encrypted alphabet will not be the same always.
+
+        FUNCTIONALITIES: The following modules are present
+
+                            a) Encoder: It is an alphabet to binary encoder
+                            b) Decoder: It is a binary to alphabet decoder
+                            
+                            There is an input array- setting, which helps in deciding which block must encode/decode data
+                            
+                            c) Block 1,2,3 and 4: Blocks which encode/decode data using boolean equations
+
+        BRIEF DESCRIPTION OF CODE:  The user enters some data (given in test-bench) and sets a code to encrypt the data.
+                                    This data is then encrypted in the following module and then displayed.
+                                    For decrypting the same data must be entered with same settings.
+                                    For making the process easier there is an alphabet-binary encoder along with a binary-alphabet decoder.
+*/
 module MEM (output [8:1] out, input [8:1] in, input [1:0] setting);
 
 
@@ -109,16 +131,20 @@ endmodule
 // Module depicting black box 3 functionality in circuit
 module block3 (output [4:0] out, input [4:0] in);
 
-    // 
-    assign out[0] = (~in[4]&~in[3]&~in[2])|(~in[3]&in[2]&~in[1])|(~in[2]&in[1]&in[0])|(in[2]&~in[1]&~in[0])|(in[4]&in[1]&~in[0]);
-    // 
-    assign out[1] = (in[2]&in[1])|(~in[4]&~in[3]&in[1])|(~in[4]&in[1]&in[0])|(~in[4]&~in[3]&in[2]&in[0])|(in[4]&~in[3]&~in[2]&~in[0]);
-    // 
-    assign out[2] = (~in[3]&in[1]&~in[0])|(in[3]&~in[1]&in[0])|(in[3]&in[2]&in[1])|(in[4]&in[2]&~in[0])|(in[4]&~in[2]&in[1])|(~in[4]&~in[2]&~in[1]&in[0]);
-    // 
-    assign out[3] = (in[4]&in[3])|(~in[3]&in[2]&~in[0])|(in[3]&~in[1]&~in[0])|(in[4]&~in[1]&~in[0])|(~in[4]&~in[3]&~in[2]&in[1]&in[0]);
-    // 
-    assign out[4] = (in[3]&in[2]&~in[1])|(in[3]&in[2]&in[0])|(~in[4]&~in[3]&~in[2]&~in[1])|(~in[4]&~in[3]&~in[1]&in[0])|(~in[4]&in[3]&~in[2]&~in[0])|(in[4]&~in[2]&in[1]&~in[0])|(in[4]&in[2]&in[1]&in[0]);
+    // F5 = A'B'C' + B'CD' + C'DE + CD'E' + ADE'
+    assign out[0] = (~in[4] & ~in[3] & ~in[2]) | ( ~in[3] & in[2] & ~in[1]) | (~in[2] & in[1] & in[0]) | ( in[2] & ~in[1] & ~in[0]) | ( in[4] & in[1] & ~in[0]);
+    
+    // F4 = CD + A'B'D + A'DE + A'B'CE + AB'C'E' 
+    assign out[1] = (in[2] & in[1]) | (~in[4] & ~in[3] & in[1]) | (~in[4] & in[1] & in[0]) | (~in[4] & ~in[3] & in[2] & in[0]) | (in[4] & ~in[3] & ~in[2] & ~in[0]);
+    
+    // F3 = B'DE' + BD'E + BCD + ACE' + AC'D + A'C'D'E  
+    assign out[2] = (~in[3] & in[1] & ~in[0]) | (in[3] & ~in[1] & in[0]) | (in[3] & in[2] & in[1]) | (in[4] & in[2] & ~in[0]) | (in[4] & ~in[2] & in[1]) | (~in[4] & ~in[2] & ~in[1] & in[0]);
+    
+    // F2 = AB + B'CE' + BD'E' + AD'E' + A'B'C'DE 
+    assign out[3] = (in[4] & in[3]) | (~in[3] & in[2] & ~in[0]) | (in[3] & ~in[1] & ~in[0]) | (in[4] & ~in[1] & ~in[0]) | (~in[4] & ~in[3] & ~in[2] & in[1] & in[0]);
+    
+    // F1 = BCD' + BCE + A'B'C'D' + A'B'D'E + A'BC'E' + AC'DE' + ACDE 
+    assign out[4] = (in[3] & in[2] & ~in[1]) | (in[3] & in[2] & in[0]) | (~in[4] & ~in[3] & ~in[2] & ~in[1]) | (~in[4] & ~in[3] & ~in[1] & in[0]) | (~in[4] & in[3] & ~in[2] & ~in[0]) | (in[4] & ~in[2] & in[1] & ~in[0]) | (in[4] & in[2] & in[1] & in[0]);
     
 
 endmodule
@@ -126,16 +152,20 @@ endmodule
 // Module depicting black box 4 functionality in circuit
 module block4 (output [4:0] out, input [4:0] in);
 
-    //
-    assign out[0] = (in[4]&~in[0])|(~in[3]&~in[1]&~in[0])|(in[2]&in[1]&~in[0])|(in[3]&~in[2]&~in[0])|(~in[4]&~in[3]&in[2]&in[1])|(in[4]&~in[3]&~in[2]&~in[1]);
-    //
-    assign out[1] = (in[4]&~in[3]&~in[2])|(in[3]&in[1]&~in[0])|(in[3]&in[2]&~in[1])|(in[4]&~in[2]&in[0])|(in[4]&in[1]&in[0])|(~in[3]&~in[2]&in[1]&in[0])|(in[4]&~in[3]&~in[1]&~in[0]);
-    //
-    assign out[2] = (in[3]&~in[1]&in[0])|(in[3]&in[2]&in[1])|(~in[4]&~in[2]&~in[1]&~in[0])|(~in[4]&~in[3]&in[1]&~in[0])|(in[4]&~in[2]&~in[1]&in[0])|(in[4]&in[2]&~in[1]&~in[0])|(in[4]&in[2]&in[1]&in[0]);
-    //
-    assign out[3] = (in[4]&in[2])|(~in[3]&in[2]&~in[0])|(in[4]&in[1]&in[0])|(~in[4]&~in[3]&in[1]&~in[0])|(in[4]&~in[3]&~in[1]&~in[0])|(~in[4]&~in[3]&~in[2]&~in[1]&in[0]);
-    //
-    assign out[4] = (in[3]&in[1])|(~in[4]&in[1]&in[0])|(in[4]&in[3]&in[0])|(~in[4]&~in[3]&~in[2]&in[0])|(~in[4]&in[3]&~in[2]&~in[0])|(in[4]&in[2]&in[1]&~in[0]);
+    // F5 = AE' + B'D'E' + CDE' + BC'E' + A'B'CD + AB'C'D'
+    assign out[0] = (in[4] & ~in[0]) | (~in[3] & ~in[1] & ~in[0]) | (in[2] & in[1] & ~in[0]) | (in[3] & ~in[2] & ~in[0]) | (~in[4] & ~in[3] & in[2] & in[1]) | (in[4] & ~in[3] & ~in[2] & ~in[1]);
+    
+    // F4 = AB'C' + BDE' + BCD' + AC'E + ADE + B'C'DE + AB'D'E' 
+    assign out[1] = (in[4] & ~in[3] & ~in[2]) | ( in[3] & in[1] & ~in[0]) | (in[3] & in[2] & ~in[1]) | (in[4] & ~in[2] & in[0]) | (in[4] & in[1] & in[0]) | (~in[3] & ~in[2] & in[1] & in[0]) | (in[4] & ~in[3] & ~in[1] & ~in[0]);
+    
+    // F3 = BD'E + BCD + A'C'D'E' + A'B'DE' + AC'D'E + ACD'E' + ACDE
+    assign out[2] = (in[3] & ~in[1] & in[0]) | (in[3] & in[2] & in[1]) | (~in[4] & ~in[2] & ~in[1] & ~in[0]) | (~in[4] & ~in[3] & in[1] & ~in[0]) | (in[4] & ~in[2] & ~in[1] & in[0]) | (in[4] & in[2] & ~in[1] & ~in[0]) | (in[4] & in[2] & in[1] & in[0]);
+    
+    // F2 = AC + B'CE' + ADE + A'B'DE' + AB'D'E' + A'B'C'D'E
+    assign out[3] = (in[4] & in[2]) | (~in[3] & in[2] & ~in[0]) | (in[4] & in[1] & in[0]) | (~in[4] & ~in[3] & in[1] & ~in[0]) | (in[4] & ~in[3] & ~in[1] & ~in[0]) | (~in[4] & ~in[3] & ~in[2] & ~in[1] & in[0]);
+    
+    // F1 = BD + A'DE + ABE + A'B'C'E + A'BC'E' + ACDE' 
+    assign out[4] = (in[3] & in[1]) | (~in[4] & in[1] & in[0]) | (in[4] & in[3] & in[0]) | (~in[4] & ~in[3] & ~in[2] & in[0]) | (~in[4] & in[3] & ~in[2] & ~in[0]) | (in[4] & in[2] & in[1] & ~in[0]);
 
 endmodule
 
