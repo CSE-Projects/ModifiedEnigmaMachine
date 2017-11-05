@@ -23,6 +23,9 @@
                                     For decrypting the same data must be entered with same settings.
                                     For making the process easier there is an alphabet-binary encoder along with a binary-alphabet decoder.
 */
+
+
+
 module MEM (output [8:1] out, input [8:1] in, input [1:0] setting);
 
 

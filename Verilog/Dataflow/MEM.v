@@ -38,8 +38,8 @@ module t_MEM;
         $dumpfile("MEM.vcd");
         $dumpvars(0, t_MEM);
 
-        $display("\n\n\t\t----THE MODIFIED ENIGMA MACHINE----\n");
-        $display("\n\t\t----ENCODING:\"HELLOWORLD\", SETTINGS:2103----\n");
+        $display("\n\n ================== THE MODIFIED ENIGMA MACHINE ==================\n");
+        $display("\n\t------ ENCRYPTING: \"HELLOWORLD\", SETTINGS: 2103 ------\n");
 
         setting = 2'b10;
         in = "H";
@@ -72,7 +72,7 @@ module t_MEM;
         in = "D";
         #10;
 
-        $display("\n\t\t----DECRYPTING----\n");
+        $display("\n\t------ DECRYPTING: \"CSYQGKAHDC\", SETTINGS: 2103 ------\n");
 
         #10;
         setting = 2'b10;
@@ -106,6 +106,7 @@ module t_MEM;
         in = "C";
         #10;
     end
+
 
     initial begin
         #1;
