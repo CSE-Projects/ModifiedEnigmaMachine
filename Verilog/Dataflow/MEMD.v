@@ -78,6 +78,10 @@ module MEM (output [8:1] out, input [8:1] in, input [1:0] setting);
 
 
     // Selection logic
+
+    // selectedOut[] is the array having the desired result. It must be given a value according to the settings and out variable.
+    // This is done such that if setting were 0 then the selectedOut will be equivalent to out1 and so on.
+
     assign selectedOut[0] = (~setting[0] & ~setting[1] & out1[0]) | (setting[0] & ~setting[1] & out2[0]) | (~setting[0] & setting[1] & out3[0]) | (setting[0] & setting[1] & out4[0]);
     assign selectedOut[1] = (~setting[0] & ~setting[1] & out1[1]) | (setting[0] & ~setting[1] & out2[1]) | (~setting[0] & setting[1] & out3[1]) | (setting[0] & setting[1] & out4[1]);
     assign selectedOut[2] = (~setting[0] & ~setting[1] & out1[2]) | (setting[0] & ~setting[1] & out2[2]) | (~setting[0] & setting[1] & out3[2]) | (setting[0] & setting[1] & out4[2]);

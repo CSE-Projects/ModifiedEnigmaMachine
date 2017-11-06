@@ -68,6 +68,9 @@ module MEM (output reg [8:1] out, input [8:1] in, input [1:0] setting);
         // stored input ASCII character in inp 
         inp = in;
         #1;
+
+        // Choosing the black boxes according to the settings. For example if the setting were 0 then out1 will give the desired output.
+        // This output is assigned to the variable out. 
         case (setting)
             2'b00: begin out <= out1; end
             2'b01: begin out <= out2; end
