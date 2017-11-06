@@ -22,6 +22,8 @@
                                     This data is then encrypted in the following module and then displayed.
                                     For decrypting the same data must be entered with same settings.
                                     For making the process easier there is an alphabet-binary encoder along with a binary-alphabet decoder.
+        
+        MODEL: Data Flow                            
 */
 
 
@@ -30,16 +32,16 @@ module MEM (output [8:1] out, input [8:1] in, input [1:0] setting);
 
 
     // Variables for outputs from each black box module
-        // varible to store output from black box 1
+        // variable to store output from black box 1
     wire [4:0] out1;
 
-        // varible to store output from black box 2
+        // variable to store output from black box 2
     wire [4:0] out2;
 
-        // varible to store output from black box 3
+        // variable to store output from black box 3
     wire [4:0] out3;
 
-        // varible to store output from black box 4
+        // variable to store output from black box 4
     wire [4:0] out4;
 
 
@@ -91,8 +93,17 @@ module MEM (output [8:1] out, input [8:1] in, input [1:0] setting);
 
 endmodule
 
-// Module depicting black box 1 functionality in circuit
+
+
+/**
+ * Module depicting black box 1 functionality in circuit
+ * (output: encoded character for the given input, input: input character to the black box)
+ * output bits: (MSB)F5F4F3F2F1(LSB), input bits: (MSB)ABCDE(LSB)
+ */
 module block1 (output [4:0] out, input [4:0] in);
+
+	// Each character bits is mapped to another character which is chosen for this block using boolean functions
+	// The equation is reduced using K Map
 
     // F5 = D'CE' + AD'E' + ACD + A'C'DE' + A'B'C'D' + A'B'D'E 
     assign out[0] = (~in[1] & in[2] & ~in[0]) | (in[4] & ~in[1] & ~in[0]) | (in[4] & in[2] & in[1]) | (~in[4] & ~in[2] & in[1] & ~in[0]) | (~in[4] & in[3] & ~in[2] & ~in[1]) | (~in[4] & ~in[3] & ~in[1] & in[0]);
@@ -111,8 +122,18 @@ module block1 (output [4:0] out, input [4:0] in);
 
 endmodule
 
-// Module depicting black box 2 functionality in circuit
+
+
+/**
+ * Module depicting black box 2 functionality in circuit
+ * (output: encoded character for the given input, input: input character to the black box)
+ * output bits: (MSB)F5F4F3F2F1(LSB), input bits: (MSB)ABCDE(LSB)
+ */
 module block2 (output [4:0] out, input [4:0] in);
+
+	// Each character bits is mapped to another character which is chosen for this block using boolean functions
+	// The equation is reduced using K Map
+
 
     // F5 = A'D'E + A'CE + BCD' + ACD' + A'B'C'E' + B'C'D'E' + AC'DE 
     assign out[0] = (~in[4] & ~in[1] & in[0]) | (~in[4] & in[2] & in[0]) | (in[3] & in[2] & ~in[1]) | (in[4] & in[2] & ~in[1]) | (~in[4] & ~in[3] & ~in[2] & ~in[0]) | (~in[3] & ~in[2] & ~in[1] & ~in[0]) | (in[4] & ~in[2] & in[1] & in[0]);
@@ -131,8 +152,18 @@ module block2 (output [4:0] out, input [4:0] in);
 
 endmodule
 
-// Module depicting black box 3 functionality in circuit
+
+
+/**
+ * Module depicting black box 3 functionality in circuit
+ * (output: encoded character for the given input, input: input character to the black box)
+ * output bits: (MSB)F5F4F3F2F1(LSB), input bits: (MSB)ABCDE(LSB)
+ */
 module block3 (output [4:0] out, input [4:0] in);
+
+	// Each character bits is mapped to another character which is chosen for this block using boolean functions
+	// The equation is reduced using K Map
+
 
     // F5 = A'B'C' + B'CD' + C'DE + CD'E' + ADE'
     assign out[0] = (~in[4] & ~in[3] & ~in[2]) | ( ~in[3] & in[2] & ~in[1]) | (~in[2] & in[1] & in[0]) | ( in[2] & ~in[1] & ~in[0]) | ( in[4] & in[1] & ~in[0]);
@@ -152,8 +183,18 @@ module block3 (output [4:0] out, input [4:0] in);
 
 endmodule
 
-// Module depicting black box 4 functionality in circuit
+
+
+/**
+ * Module depicting black box 4 functionality in circuit
+ * (output: encoded character for the given input, input: input character to the black box)
+ * output bits: (MSB)F5F4F3F2F1(LSB), input bits: (MSB)ABCDE(LSB)
+ */
 module block4 (output [4:0] out, input [4:0] in);
+
+	// Each character bits is mapped to another character which is chosen for this block using boolean functions
+	// The equation is reduced using K Map
+
 
     // F5 = AE' + B'D'E' + CDE' + BC'E' + A'B'CD + AB'C'D'
     assign out[0] = (in[4] & ~in[0]) | (~in[3] & ~in[1] & ~in[0]) | (in[2] & in[1] & ~in[0]) | (in[3] & ~in[2] & ~in[0]) | (~in[4] & ~in[3] & in[2] & in[1]) | (in[4] & ~in[3] & ~in[2] & ~in[1]);
@@ -172,6 +213,14 @@ module block4 (output [4:0] out, input [4:0] in);
 
 endmodule
 
+
+
+/**
+ * Module for Encoder
+ * (output: stored in encodedInput variable after converting to 5 bit encoding from 8 bit ASCII, input: input to machine (character in ASCII))
+ * Converts 8 bit ASCII character to 5 bit equivalent
+ * eg. A => '00000' to Z => '11001'
+ */
 module encoder (output [4:0] encodedInput, input [8:1] in);
 
     wire [8:1] res;
@@ -186,6 +235,14 @@ module encoder (output [4:0] encodedInput, input [8:1] in);
 
 endmodule
 
+
+
+/**
+ * Module for Decoder
+ * (output: output of the machine, input: selected bits from selection logic)
+ * Converts 5 bit character encoding to its 8 bit ASCII equivalent
+ * eg. '00000' => A to '11001' => Z
+ */
 module decoder (output [8:1] out, input [4:0] selectedOut);
 
     wire [8:1] res;

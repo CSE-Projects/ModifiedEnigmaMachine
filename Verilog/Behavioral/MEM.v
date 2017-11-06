@@ -1,5 +1,7 @@
 `timescale 1ns/100ps
 
+// TEST BENCH
+
 /*
         TITLE: THE MODIFIED ENIGMA MACHINE
 
@@ -32,7 +34,8 @@ module t_MEM;
 
     
     MEM inst(out, in, setting);
-
+    
+	// input combinations 
     initial begin
 
         $dumpfile("MEM.vcd");
@@ -107,6 +110,7 @@ module t_MEM;
         #10;
     end
 
+	// display outputs
     always @ (in) begin
         #5;
         $display("\n\t\tinput: %c output: %c\n", in, out);

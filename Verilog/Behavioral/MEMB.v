@@ -1,18 +1,44 @@
 `timescale 1ns/100ps
 
+/*
+        TITLE: THE MODIFIED ENIGMA MACHINE
+
+        REG NO: 16CO154-16CO233
+
+        ABSTRACT: A circuit that encrypts data by mapping each alphabet to another alphabet randomly. 
+                  This will be done in such a way that if the same alphabet is repeated, 
+                  the encrypted alphabet will not be the same always.
+
+        FUNCTIONALITIES: The following modules are present
+
+                            a) Encoder: It is an alphabet to binary encoder
+                            b) Decoder: It is a binary to alphabet decoder
+                            
+                            There is an input array- setting, which helps in deciding which block must encode/decode data
+                            
+                            c) Block 1,2,3 and 4: Blocks which encode/decode data using boolean equations
+
+        BRIEF DESCRIPTION OF CODE:  The user enters some data (given in test-bench) and sets a code to encrypt the data.
+                                    This data is then encrypted in the following module and then displayed.
+                                    For decrypting the same data must be entered with same settings.
+                                    For making the process easier there is an alphabet-binary encoder along with a binary-alphabet decoder.
+                                    
+        MODEL: Behavoiral                            
+*/
+ 
 module MEM (output reg [8:1] out, input [8:1] in, input [1:0] setting);
 
     // Variables for outputs from each black box module
-        // varible to store output from black box 1
+        // variable to store output from black box 1
     wire [8:1] out1;
 
-        // varible to store output from black box 2
+        // variable to store output from black box 2
     wire [8:1] out2;
 
-        // varible to store output from black box 3
+        // variable to store output from black box 3
     wire [8:1] out3;
 
-        // varible to store output from black box 4
+        // variable to store output from black box 4
     wire [8:1] out4;
 
 
@@ -52,10 +78,14 @@ module MEM (output reg [8:1] out, input [8:1] in, input [1:0] setting);
 
 endmodule
 
-// Module depicting black box 1 functionality in circuit
+/**
+ * Module depicting black box 1 functionality in circuit
+ * (output: encoded character for the input, input: input character to the black box)
+ */
 module block1 (output reg [8:1] out, input [8:1] in);
 
-    // this thread denotes the behavior of the black box by specifing the mapping choosen for this black box
+    // this thread denotes the behavior of the black box:
+    // By specifing the mapping of a character to another choosen for this black box
     always @ (in) begin
         case (in)
             "A": begin out <= "O"; end
@@ -89,10 +119,14 @@ module block1 (output reg [8:1] out, input [8:1] in);
 
 endmodule
 
-// Module depicting black box 2 functionality in circuit
+/**
+ * Module depicting black box 2 functionality in circuit
+ * (output: encoded character for the input, input: input character to the black box)
+ */
 module block2 (output reg [8:1] out, input [8:1] in);
 
-    // this thread denotes the behavior of the black box by specifing the mapping choosen for this black box
+    // this thread denotes the behavior of the black box:
+    // By specifing the mapping of a character to another choosen for this black box
     always @ (in) begin
         case (in)
             "A": begin out <= "X"; end
@@ -126,10 +160,14 @@ module block2 (output reg [8:1] out, input [8:1] in);
 
 endmodule
 
-// Module depicting black box 3 functionality in circuit
+/**
+ * Module depicting black box 3 functionality in circuit
+ * (output: encoded character for the input, input: input character to the black box)
+ */
 module block3 (output reg [8:1] out, input [8:1] in);
 
-    // this thread denotes the behavior of the black box by specifing the mapping choosen for this black box
+    // this thread denotes the behavior of the black box:
+    // By specifing the mapping of a character to another choosen for this black box
     always @ (in) begin
         case (in)
             "A": begin out <= "R"; end
@@ -163,10 +201,14 @@ module block3 (output reg [8:1] out, input [8:1] in);
 
 endmodule
 
-// Module depicting black box 4 functionality in circuit
+/**
+ * Module depicting black box 4 functionality in circuit
+ * (output: encoded character for the input, input: input character to the black box)
+ */
 module block4 (output reg [8:1] out, input [8:1] in);
 
-    // this thread denotes the behavior of the black box by specifing the mapping choosen for this black box
+    // this thread denotes the behavior of the black box:
+    // By specifing the mapping of a character to another choosen for this black box
     always @ (in) begin
         case (in)
             "A": begin out <= "F"; end
