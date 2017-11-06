@@ -5,23 +5,27 @@
 
         REG NO: 16CO154-16CO233
 
-        ABSTRACT: A circuit that encrypts data by mapping each alphabet to another alphabet randomly. 
-                  This will be done in such a way that if the same alphabet is repeated, 
-                  the encrypted alphabet will not be the same always.
+        ABSTRACT: A circuit that encrypts data by mapping each alphabet to another alphabet randomly.
+                  Thus a message is encrypted by a user based on a setting decided by the user and the receiver.
+                  The receiver has to enter the encrypted data along with the same decided setting to get the desired (decrypted) message.
 
-        FUNCTIONALITIES: The following modules are present
+        FUNCTIONALITIES: The following modules are present:
 
-                            a) Encoder: It is an alphabet to binary encoder
-                            b) Decoder: It is a binary to alphabet decoder
-                            
-                            There is an input array- setting, which helps in deciding which block must encode/decode data
-                            
-                            c) Block 1,2,3 and 4: Blocks which encode/decode data using boolean equations
+                            1) VerilogDM_154_233: Handles the selection of black box modules as per the setting along with passing inputs and outputs
+                            2) block1, block2, block3, block4 : These are black boxes in which an alphabet is mapped to another alphabet.  
+                            3) encoder : An alphabet is converted to its 5-bit binary enquivalent from a => 00000 to z => 11001.
+                            4) decoder : 5-bit binary is converted to its enquivalent alphabet character from 00000 => a to 11001 => z.
 
-        BRIEF DESCRIPTION OF CODE:  The user enters some data (given in test-bench) and sets a code to encrypt the data.
+        BRIEF DESCRIPTION OF CODE:  The user enters the characters of the message in the test bench
+                                    along with the setting code for each character which the user has decided and has passed to the receiver.
                                     This data is then encrypted in the following module and then displayed.
-                                    For decrypting the same data must be entered with same settings.
-                                    For making the process easier there is an alphabet-binary encoder along with a binary-alphabet decoder.
+                                    The encoder module converts the input ASCII character to 5 bit equivalent.
+                                    Each black box gives the corresponding output based on the mapping done inside it,
+                                    The VerilogDM_154_233 module handles the selection of the black box outputs based on the setting input.
+                                    It then puts the selected answer from the black box to the decoder.
+                                    The decoder module converts the 5 bit encoding to its ASCII equivalent.
+                                    Through the VerilogDM_154_233 the decoded output is fed to the output of the machine.
+                                    For decrypting the same set of character produced during encoding must be entered with same settings.
         
         MODEL: Data Flow                            
 */
@@ -227,10 +231,13 @@ endmodule
  */
 module encoder (output [4:0] encodedInput, input [8:1] in);
 
+    // variable for the conversion
     wire [8:1] res;
-
+    
+    // substact the ASCII value of "A" to get the correspoding bits
     assign res = in - "A";
 
+    // first 5 bits will be the 5 bit encoding needed for this circuit
     assign encodedInput[4] = res[5];
     assign encodedInput[3] = res[4];
     assign encodedInput[2] = res[3];
@@ -249,8 +256,10 @@ endmodule
  */
 module decoder (output [8:1] out, input [4:0] selectedOut);
 
+    // variable for the conversion
     wire [8:1] res;
 
+    // feed the 5 bit to the 8 bit variable
     assign res[8] = 1'b0;
     assign res[7] = 1'b0;
     assign res[6] = 1'b0;
@@ -260,6 +269,7 @@ module decoder (output [8:1] out, input [4:0] selectedOut);
     assign res[2] = selectedOut[1];
     assign res[1] = selectedOut[0];
 
+    // offset by ASCII character "A" to get final ASCII character value
     assign out = res + "A";
 
 endmodule
