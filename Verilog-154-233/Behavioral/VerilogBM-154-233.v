@@ -24,8 +24,13 @@
                                     
         MODEL: Behavioral                            
 */
- 
-module VerilogBM_154_233 (output reg [8:1] out, input [8:1] in, input [1:0] setting);
+
+/**
+ * Main Module for MODIFIED ENIGMA MACHINE 
+ */ 
+module VerilogBM_154_233 (output reg [8:1] out,  // output: output character of the machine
+                          input [8:1] in,        // input: input character to the machine,
+                          input [1:0] setting);  // input: setting given to the machine
 
     // Variables for outputs from each black box module
         // variable to store output from black box 1
@@ -50,19 +55,19 @@ module VerilogBM_154_233 (output reg [8:1] out, input [8:1] in, input [1:0] sett
         // black box 1 (output: output bits from box1, input: inp bits from input to the machine)
     block1 box1 (out1, inp);
     
-        // black box 1 (output: output bits from box2, input: inp bits from input to the machine)
+        // black box 2 (output: output bits from box2, input: inp bits from input to the machine)
     block2 box2 (out2, inp);
 
-        // black box 1 (output: output bits from box3, input: inp bits from input to the machine)
+        // black box 3 (output: output bits from box3, input: inp bits from input to the machine)
     block3 box3 (out3, inp);
 
-        // black box 1 (output: output bits from box4, input: inp bits from input to the machine)
+        // black box 4 (output: output bits from box4, input: inp bits from input to the machine)
     block4 box4 (out4, inp);
     
 
 
     // main thread for selection logic
-    always @ (in) begin
+    always @ (in or setting) begin
         
         // stored input ASCII character in inp 
         inp = in;

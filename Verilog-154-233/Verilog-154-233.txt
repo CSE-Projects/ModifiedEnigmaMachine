@@ -1,6 +1,7 @@
 README FILE
 
 
+Characters from the message are provided as inputs along with setting to for each character
 
 The test bench takes settings and the information to be encoded/decoded as input.
 

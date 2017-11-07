@@ -1,4 +1,4 @@
-`timescale 1ns/100ps
+    `timescale 1ns/100ps
 
 // TEST BENCH
 
@@ -7,24 +7,25 @@
 
         REG NO: 16CO154-16CO233
 
-        ABSTRACT: A circuit that encrypts data by mapping each alphabet to another alphabet randomly. 
-                  This will be done in such a way that if the same alphabet is repeated, 
-                  the encrypted alphabet will not be the same always.
+        ABSTRACT: A circuit that encrypts data by mapping each alphabet to another alphabet randomly.
+                  Thus a message is encrypted by a user based on a setting decided by the user and the receiver.
+                  The receiver has to enter the encrypted data along with the same decided setting to get the desired (decrypted) message.
 
         FUNCTIONALITIES: The following modules are present
 
-                            a) Encoder: It is an alphabet to binary encoder
-                            b) Decoder: It is a binary to alphabet decoder
-                            
-                            There is an input array- setting, which helps in deciding which block must encode/decode data
-                            
-                            c) Block 1,2,3 and 4: Blocks which encode/decode data using boolean equations
+                            1) Verilog_154_233: It provides the stimulus for the VerilogBM_102_205, VerilogDM_102_205 modules to run
+                                                Providing the input to the machine and the setting decided by sender and receiver
 
-        BRIEF DESCRIPTION OF CODE:  The user enters some data (given in test-bench) and sets a code to encrypt the data.
-                                    This data is then encrypted in the following module and then displayed.
-                                    For decrypting the same data must be entered with same settings.
-                                    For making the process easier there is an alphabet-binary encoder along with a binary-alphabet decoder.
+        BRIEF DESCRIPTION OF CODE:  The user enters the characters of the message in the test bench
+                                    along with the setting code for each character which the user has decided and has passed to the receiver.
+                                    This data is then encrypted in VerilogBM_102_205, VerilogDM_102_205 modules and then displayed.
+                                    Each black box inside the main modules gives the corresponding output based on the mapping done inside it,
+                                    The VerilogBM_102_205, VerilogDM_102_205 module handles the selection of the black box outputs based on the setting input.
+                                    It then puts the selected answer from the black box to the output of the machine.
+                                    For decrypting the same set of character produced during encoding must be entered with same settings.
 */
+
+
 
 module Verilog_154_233;
 
@@ -32,7 +33,7 @@ module Verilog_154_233;
     reg [8:1] in;
     wire [8:1] out;
 
-    
+    // Main Module for MODIFIED ENIGMA MACHINE instantiated
     VerilogDM_154_233 inst(out, in, setting);
     
 	// input combinations 
@@ -111,7 +112,7 @@ module Verilog_154_233;
     end
 
 	// display outputs
-    always @ (in) begin
+    always @ (setting) begin
         #5;
         $display("\n\t\tinput: %c output: %c\n", in, out);
     end

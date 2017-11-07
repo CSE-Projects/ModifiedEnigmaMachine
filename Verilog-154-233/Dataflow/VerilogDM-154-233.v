@@ -31,8 +31,12 @@
 */
 
 
-
-module VerilogDM_154_233 (output [8:1] out, input [8:1] in, input [1:0] setting);
+/**
+ * Main Module for MODIFIED ENIGMA MACHINE 
+ */ 
+module VerilogDM_154_233 (output [8:1] out,  // output: output character of the machine
+                          input [8:1] in,        // input: input character to the machine,
+                          input [1:0] setting);  // input: setting given to the machine
 
 
     // Variables for outputs from each black box module
@@ -70,13 +74,13 @@ module VerilogDM_154_233 (output [8:1] out, input [8:1] in, input [1:0] setting)
         // black box 1 (output: output bits from box1, input: encodedInput bits from encoder module)
     block1 box1 (out1, encodedInput);
     
-        // black box 1 (output: output bits from box2, input: encodedInput bits from encoder module)
+        // black box 2 (output: output bits from box2, input: encodedInput bits from encoder module)
     block2 box2 (out2, encodedInput);
 
-        // black box 1 (output: output bits from box3, input: encodedInput bits from encoder module)
+        // black box 3 (output: output bits from box3, input: encodedInput bits from encoder module)
     block3 box3 (out3, encodedInput);
 
-        // black box 1 (output: output bits from box4, input: encodedInput bits from encoder module)
+        // black box 4 (output: output bits from box4, input: encodedInput bits from encoder module)
     block4 box4 (out4, encodedInput);
 
 
@@ -84,8 +88,8 @@ module VerilogDM_154_233 (output [8:1] out, input [8:1] in, input [1:0] setting)
     // Selection logic
 
     // selectedOut[] is the array having the desired result. It must be given a value according to the settings and out variable.
+    // So boolean funcition for getting the out bits from a particular black box for a particular setting was found out
     // This is done such that if setting were 0 then the selectedOut will be equivalent to out1 and so on.
-
     assign selectedOut[0] = (~setting[0] & ~setting[1] & out1[0]) | (setting[0] & ~setting[1] & out2[0]) | (~setting[0] & setting[1] & out3[0]) | (setting[0] & setting[1] & out4[0]);
     assign selectedOut[1] = (~setting[0] & ~setting[1] & out1[1]) | (setting[0] & ~setting[1] & out2[1]) | (~setting[0] & setting[1] & out3[1]) | (setting[0] & setting[1] & out4[1]);
     assign selectedOut[2] = (~setting[0] & ~setting[1] & out1[2]) | (setting[0] & ~setting[1] & out2[2]) | (~setting[0] & setting[1] & out3[2]) | (setting[0] & setting[1] & out4[2]);
@@ -106,7 +110,7 @@ endmodule
 /**
  * Module depicting black box 1 functionality in circuit
  * (output: encoded character for the given input, input: input character to the black box)
- * output bits: (MSB)F5F4F3F2F1(LSB), input bits: (MSB)ABCDE(LSB)
+ * output bits: (MSB)F1F2F3F4F5(LSB), input bits: (MSB)ABCDE(LSB)
  */
 module block1 (output [4:0] out, input [4:0] in);
 
@@ -135,7 +139,7 @@ endmodule
 /**
  * Module depicting black box 2 functionality in circuit
  * (output: encoded character for the given input, input: input character to the black box)
- * output bits: (MSB)F5F4F3F2F1(LSB), input bits: (MSB)ABCDE(LSB)
+ * output bits: (MSB)F1F2F3F4F5(LSB), input bits: (MSB)ABCDE(LSB)
  */
 module block2 (output [4:0] out, input [4:0] in);
 
@@ -165,7 +169,7 @@ endmodule
 /**
  * Module depicting black box 3 functionality in circuit
  * (output: encoded character for the given input, input: input character to the black box)
- * output bits: (MSB)F5F4F3F2F1(LSB), input bits: (MSB)ABCDE(LSB)
+ * output bits: (MSB)F1F2F3F4F5(LSB), input bits: (MSB)ABCDE(LSB)
  */
 module block3 (output [4:0] out, input [4:0] in);
 
@@ -196,7 +200,7 @@ endmodule
 /**
  * Module depicting black box 4 functionality in circuit
  * (output: encoded character for the given input, input: input character to the black box)
- * output bits: (MSB)F5F4F3F2F1(LSB), input bits: (MSB)ABCDE(LSB)
+ * output bits: (MSB)F1F2F3F4F5(LSB), input bits: (MSB)ABCDE(LSB)
  */
 module block4 (output [4:0] out, input [4:0] in);
 
