@@ -26,20 +26,20 @@
                                     For making the process easier there is an alphabet-binary encoder along with a binary-alphabet decoder.
 */
 
-module t_MEM;
+module Verilog_154_233;
 
     reg [1:0] setting;
     reg [8:1] in;
     wire [8:1] out;
 
     
-    MEM inst(out, in, setting);
+    VerilogDM_154_233 inst(out, in, setting);
     
 	// input combinations 
     initial begin
 
-        $dumpfile("MEM.vcd");
-        $dumpvars(0, t_MEM);
+        $dumpfile("VerilogDM-154-233.vcd");
+        $dumpvars(0, Verilog_154_233);
 
         $display("\n\n ================== THE MODIFIED ENIGMA MACHINE ==================\n");
         $display("\n\t------ ENCRYPTING: \"HELLOWORLD\", SETTINGS: 2103 ------\n");

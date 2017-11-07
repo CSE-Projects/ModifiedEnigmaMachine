@@ -25,7 +25,7 @@
         MODEL: Behavioral                            
 */
  
-module MEM (output reg [8:1] out, input [8:1] in, input [1:0] setting);
+module VerilogBM_154_233 (output reg [8:1] out, input [8:1] in, input [1:0] setting);
 
     // Variables for outputs from each black box module
         // variable to store output from black box 1

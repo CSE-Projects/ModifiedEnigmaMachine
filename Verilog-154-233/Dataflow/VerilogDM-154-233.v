@@ -32,7 +32,7 @@
 
 
 
-module MEM (output [8:1] out, input [8:1] in, input [1:0] setting);
+module VerilogDM_154_233 (output [8:1] out, input [8:1] in, input [1:0] setting);
 
 
     // Variables for outputs from each black box module

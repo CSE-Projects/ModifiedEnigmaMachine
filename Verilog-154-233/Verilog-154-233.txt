@@ -1,0 +1,17 @@
+README FILE
+
+
+
+The test bench takes settings and the information to be encoded/decoded as input.
+
+It gives the encoded/decoded data as the output.
+
+The main module encrypts/decrypts data by changing an alphabet to another alphabet by means of mapping.
+
+The settings indicate what "black-box" must be selected to encode/decode data.
+
+It is to ensure that if the same alphabet is entered multiple times, the output is not the same always.
+
+For example if the code is 3021 for "hello" then 'h' must be encoded with 3, 'e' with 0, 'l' with 2 and so on.
+
+The output generated will be completely random and difficult to decipher. 
